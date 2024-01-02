@@ -67,7 +67,6 @@ def comb_sort(l: list):
 
     return ans
 
-
 def merge_sort(l: list):
     if len(l) > 1:
         left = l[:(len(l) // 2)]
@@ -96,11 +95,33 @@ def merge_sort(l: list):
 
         return l
 
+def library_sort(l: list):
+    ans = ['', l[0]]
+    j = 1
+    while j < len(l):
+        if l[j] > max([x for x in ans if x != '']):
+            ans.append('')
+            ans.append(l[j])
+        else:
+            for element in ans:
+                if element == '':
+                    continue
+                else:
+                    if element > l[j]:
+                        index = ans.index(element)
+                        ans[index-1] = l[j]
+                        ans.insert(index-1, '')
+                        ans.insert(index+1, '')
+                        break
+        j += 1         
+    
+    return [i for i in ans if i!='']
+
 def main():
     l = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 4142, 8751, 5168, 6711, 1592, 2622, 6735, 4691, 6743, 1121, 3170, 1124, 3173, 6775, 2680, 8828, 8317, 1664, 4737, 4738, 7817, 1162, 5263, 8847, 1180, 7326, 671, 9894, 5799, 680, 170, 175, 8881, 180, 9397, 1220, 197, 7366, 2759, 4820, 3812, 5863, 4328, 6380, 8429, 748, 9455, 7920, 1787, 5883, 6397, 4863, 3330, 6917, 1287, 4368, 1822, 3363, 5935, 5426, 4403, 9534, 3391, 6980, 6992, 7526, 1384, 7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    e = np.array(merge_sort(l))
-    plt.plot(e, '.')
+    l = np.array(library_sort(l))
+    plt.plot(l, '.')
     plt.show()
 
 if __name__ == "__main__":

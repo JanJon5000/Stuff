@@ -143,6 +143,44 @@ def gnome_sort(l: list) -> list:
             j -= 1
     return ans
 
+def bucket_sort(l: list) -> list:
+    ans = []
+    a = []
+    for i in range(0, 10):
+        ans.append([x for x in l if x < 1000 + i*1000 and x > 0 + i*1000])
+        ans[-1] = selection_sort(ans[-1])
+        print(ans[-1])
+        a.extend(ans[-1])
+    return a
+
+def heapify(l: list) -> list:
+    ans = l
+    flag = True
+    while flag:
+        for i in range(len(ans)-1, -1, -1):
+            dictOfIndexes = {x:ans[x] for x in [i, 2*i+1, 2*i+2] if x < len(ans)}
+            if max(dictOfIndexes.values()) != ans[i]:
+                helper = ans[i]
+                ans[i] = max(dictOfIndexes.values())
+                for j in dictOfIndexes.keys():
+                    if dictOfIndexes[j] == max(dictOfIndexes.values()):
+                        ans[j] = helper
+                        break
+        flag = False
+        for i in range(len(ans)):
+            indexesToCheck = [ans[x] for x in [2*i+1, 2*i+2, i] if x < len(ans)]
+            if ans[i] != max(indexesToCheck):
+                flag = True
+                break
+    return ans
+def heap_sort(l: list) -> list:
+    workingList = heapify(l)
+    ans = []
+    while workingList != []:
+        ans = [workingList[0]] + ans
+        del workingList[0]
+        workingList = heapify(workingList)
+    return ans
 
 def main():
     l = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 
@@ -155,9 +193,10 @@ def main():
          7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 
          965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    l = np.array(gnome_sort(l))
+    l = np.array(heap_sort(l))
     plt.plot(l, '.')
     plt.show()
+
 
 if __name__ == "__main__":
     main()

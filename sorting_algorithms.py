@@ -4,27 +4,29 @@ import numpy as np
 from pprint import pprint
 from math import floor
 
-def selection_sort(l: list):
-    for i in range(len(l)):
-        swapper = min(l[i:])
-        l[l.index(swapper)] = l[i]
-        l[i] = swapper
-    return l
+def selection_sort(l: list) -> list:
+    ans = l[:]
+    for i in range(len(ans)):
+        swapper = min(ans[i:])
+        ans[ans.index(swapper)] = ans[i]
+        ans[i] = swapper
+    return ans
 
-def bubble_sort(l: list):
-    for i in range(len(l)):
+def bubble_sort(l: list) -> list:
+    ans = l[:]
+    for i in range(len(ans)):
         flag = 0
-        for j in range(len(l)-i-1):
-            if l[j] > l[j+1]:
+        for j in range(len(ans)-i-1):
+            if ans[j] > ans[j+1]:
                 flag += 1
-                helper = l[j]
-                l[j] = l[j+1]
-                l[j+1] = helper
+                helper = ans[j]
+                ans[j] = ans[j+1]
+                ans[j+1] = helper
         if flag == 0:
             break
-    return l
+    return ans
 
-def insertion_sort(l: list):
+def insertion_sort(l: list) -> list:
     lSorted = [l[0]]
     for i in range(1, len(l)):
         for j in range(len(lSorted)):
@@ -37,21 +39,23 @@ def insertion_sort(l: list):
                 
     return lSorted
 
-def shell_sort(l: list):
-    shell_series = [int(len(l)/2)]
+def shell_sort(l: list) -> list:
+    ans = l[:]
+    shell_series = [int(len(ans)/2)]
     while shell_series[-1] > 1:
         shell_series.append(int(shell_series[-1]/2))
     
     for step in shell_series:
         for i in range(step):
-            if i + step < len(l) and l[i + step] < l[i]:
-                helper = l[i + step]
-                l[i + step] = l[i]
-                l[i] = helper
-    return l
+            if i + step < len(ans) and ans[i + step] < ans[i]:
+                helper = ans[i + step]
+                ans[i + step] = ans[i]
+                ans[i] = helper
+    ans = insertion_sort(ans)
+    return ans
 
-def comb_sort(l: list):
-    ans = l
+def comb_sort(l: list) -> list:
+    ans = l[:]
     gaps = [floor(len(ans)/1.3)]
     while gaps[-1] >= 1:
         gaps.append(floor(gaps[-1]/1.3))
@@ -67,7 +71,7 @@ def comb_sort(l: list):
 
     return ans
 
-def merge_sort(l: list):
+def merge_sort(l: list) -> list:
     if len(l) > 1:
         left = l[:(len(l) // 2)]
         right = l[(len(l) // 2):]
@@ -95,7 +99,8 @@ def merge_sort(l: list):
 
         return l
 
-def library_sort(l: list):
+# chyba źle zaimplementowane - to wciaz zwykly insertion sort - dodaje wiecej elementow i nie jest zaimplementowany na zasadzie przesówania 
+def library_sort(l: list) -> list:
     ans = ['', l[0]]
     j = 1
     while j < len(l):
@@ -117,8 +122,8 @@ def library_sort(l: list):
     
     return [i for i in ans if i!='']
 
-def cycle_sort(l: list):
-    ans = l
+def cycle_sort(l: list) -> list:
+    ans = l[:]
     for i in range(len(ans)):
         placeholder = ans[i]
         place = len([ans[i] for i in range(len(ans)) if ans[i] < placeholder])
@@ -133,7 +138,7 @@ def cycle_sort(l: list):
     return ans
 
 def gnome_sort(l: list) -> list:
-    ans = l
+    ans = l[:]
     for i in range(1, len(ans)):
         j = i
         while j - 1 >= 0 and ans[j] < ans[j-1]:
@@ -149,12 +154,11 @@ def bucket_sort(l: list) -> list:
     for i in range(0, 10):
         ans.append([x for x in l if x < 1000 + i*1000 and x > 0 + i*1000])
         ans[-1] = selection_sort(ans[-1])
-        print(ans[-1])
         a.extend(ans[-1])
     return a
 
 def heapify(l: list) -> list:
-    ans = l
+    ans = l[:]
     flag = True
     while flag:
         for i in range(len(ans)-1, -1, -1):
@@ -182,8 +186,44 @@ def heap_sort(l: list) -> list:
         workingList = heapify(workingList)
     return ans
 
+def tournament(l: list) -> list:
+    ans = l[:]
+    for i in range(0, len(ans)-1, 1):
+        if i >= len(ans):
+            break
+        ans[i] = ans[i+1] if i+1 < len(ans) and ans[i] > ans[i + 1] else ans[i]
+        if i + 1 < len(ans):
+            del ans[i+1]
+    return ans
+def tournament_sort(l: list) -> list:
+    workingList = l[:]
+    ans = []
+    while workingList != []:
+        while len(workingList) != 1:
+            workingList = tournament(workingList)
+        ans.append(workingList[0])
+        workingList = [x for x in l[:] if x not in ans]
+    return ans
+
+def counting_sort(l: list) -> list:
+    countArray = [0 for _ in range(max(l)+1)]
+    for i in range(max(l)+1):
+        countArray[i] = l.count(i)
+        if i >= 1:
+            countArray[i] += countArray[i-1]
+    ans = [0 for _ in range(len(l))]
+    for i in range(len(ans)-1, -1, -1):
+        ans[countArray[l[i]] - 1] = l[i]
+        countArray[l[i]] -= 1
+    print(ans)
+    return ans
+
+def radix_sort(l: list) -> list:
+    pass
+
+
 def main():
-    l = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 
+    p = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 
          4142, 8751, 5168, 6711, 1592, 2622, 6735, 4691, 6743, 1121, 3170, 
          1124, 3173, 6775, 2680, 8828, 8317, 1664, 4737, 4738, 7817, 1162, 
          5263, 8847, 1180, 7326, 671, 9894, 5799, 680, 170, 175, 8881, 180, 
@@ -193,8 +233,7 @@ def main():
          7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 
          965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    l = np.array(heap_sort(l))
-    plt.plot(l, '.')
+    plt.plot(np.array(counting_sort(p)), '.')
     plt.show()
 
 

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 import numpy as np
 from pprint import pprint
-from math import floor
+from math import floor, sqrt
 
 def selection_sort(l: list) -> list:
     ans = l[:]
@@ -218,8 +218,70 @@ def counting_sort(l: list) -> list:
     print(ans)
     return ans
 
-def radix_sort(l: list) -> list:
-    pass
+def pigeonhole_sort(l: list) -> list:
+    ans = l[:]
+    pigeonHoles = [0 for i in range(max(ans)+1)]
+    for i in range(len(ans)):
+        pigeonHoles[ans[i]] += 1
+    k = 0
+    for j in range(len(pigeonHoles)):
+        if pigeonHoles[j] != 0:
+            ans[k] = j
+            k += 1
+    return ans
+
+def prepare_the_radix(l: list) -> list:
+    ans = []
+    start = len(str(min(l)))
+    finish = len(str(max(l)))
+    if start == finish:
+        return l
+    for i in range(start, finish + 1):
+        ans.append([z for z in l if len(str(z)) == i])
+    return ans
+def LSD_radix_sort(l: list) -> list:
+    ans = prepare_the_radix(l)
+    properAns = []
+    for i in range(len(ans)):
+        for char in range(-1, -len(str(max(ans[i])))-1, -1):
+            placeholder = []
+            for num in '0123456789':
+                placeholder.append([x for x in ans[i] if ('0'*4+str(x))[char] == num])
+            ans[i] = []
+            for element in placeholder:
+                ans[i].extend(element)
+
+        properAns.extend(ans[i])
+    return properAns
+
+def MSD_radix_sort(l: list, radix=0) -> list:
+    try:
+        for i in range(len(l)):
+            placeholder = []
+            for char in '0123456789':
+                placeholder.append([x for x in l[i] if str(x)[radix] == char])
+            l[i] = [element for element in placeholder if element != []]
+            l[i] = MSD_radix_sort(l[i], radix+1)
+        return l
+    except IndexError:
+        return l
+    except TypeError:
+        return l
+def format_msd_radix(l: list) -> list:
+    l = str(l)
+    l = l.replace('[', '').replace(']', '').replace(' ', '')
+    return [int(x) for x in l.split(',')]
+
+def flash_sort(l: list) -> list:
+    ans = l[:]
+    pivots = [x for x in range(min(l), max(l), floor(sqrt(len(l))))]
+    buckets = []
+    for i in range(1, len(pivots), 1):
+        buckets.append(heap_sort([x for x in ans if x > pivots[i-1] and x < pivots[i]]))
+    ans = []
+    for element in buckets:
+        ans.extend(element)
+    return ans
 
 def main():
     p = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 
@@ -232,7 +294,8 @@ def main():
          7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 
          965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    plt.plot(np.array(counting_sort(p)), '.')
+    p = flash_sort(p)
+    plt.plot(np.array(p), '.')
     plt.show()
 
 

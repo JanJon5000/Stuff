@@ -270,7 +270,7 @@ def MSD_radix_sort(l: list, radix=0) -> list:
 def format_msd_radix(l: list) -> list:
     l = str(l)
     l = l.replace('[', '').replace(']', '').replace(' ', '')
-    return [int(x) for x in l.split(',')]
+    return [int(x) for x in l.split(',') if x != '']
 
 def flash_sort(l: list) -> list:
     ans = l[:]
@@ -281,6 +281,39 @@ def flash_sort(l: list) -> list:
     ans = []
     for element in buckets:
         ans.extend(element)
+    return ans
+
+def merge_two_lists(l1: list, l2: list) -> list:
+    ans = []
+    i = 0
+    j = 0
+    while i < len(l1) and j < len(l2):
+        if l1[i] > l2[j]:
+            ans.append(l2[j])
+            j += 1
+        else:
+            ans.append(l1[i])
+            i += 1
+    for element in l1:
+        ans.append(element)
+    for element in l2:
+        ans.append(element)
+    return ans
+
+def spread_sort(l: list) -> list:
+    c = floor(len(l)/4)
+    ans = []
+    placeholder = []
+    for element in l:
+        if l.index(element) % c == 0 and l.index(element) != 0:
+            ans.append(heap_sort(placeholder))
+            placeholder = []
+        else:
+            placeholder.append(element)
+    ans.append(heap_sort(placeholder))
+    limit = len(l)-1
+    for i in range(limit):
+        ans[0] = merge_two_lists(ans[0], ans[1])
     return ans
 
 def main():
@@ -294,8 +327,10 @@ def main():
          7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 
          965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    p = flash_sort(p)
-    plt.plot(np.array(p), '.')
+    p = spread_sort(p)
+    print(p)
+    # print(p, len(format_msd_radix(p)))
+    plt.plot(np.array(format_msd_radix(p)), '.')
     plt.show()
 
 

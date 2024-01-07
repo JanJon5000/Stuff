@@ -283,25 +283,8 @@ def flash_sort(l: list) -> list:
         ans.extend(element)
     return ans
 
-def merge_two_lists(l1: list, l2: list) -> list:
-    ans = []
-    i = 0
-    j = 0
-    while i < len(l1) and j < len(l2):
-        if l1[i] > l2[j]:
-            ans.append(l2[j])
-            j += 1
-        else:
-            ans.append(l1[i])
-            i += 1
-    for element in l1:
-        ans.append(element)
-    for element in l2:
-        ans.append(element)
-    return ans
-
 def spread_sort(l: list) -> list:
-    c = floor(len(l)/4)
+    c = floor(len(l)/8)
     ans = []
     placeholder = []
     for element in l:
@@ -311,10 +294,11 @@ def spread_sort(l: list) -> list:
         else:
             placeholder.append(element)
     ans.append(heap_sort(placeholder))
-    limit = len(l)-1
-    for i in range(limit):
-        ans[0] = merge_two_lists(ans[0], ans[1])
-    return ans
+    while len(ans) != 1:
+        ans[0] = heap_sort(ans[0]+ans[1])
+        del ans[1]
+    return ans[0]
+
 
 def main():
     p = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 

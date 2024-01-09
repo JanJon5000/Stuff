@@ -3,7 +3,7 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 import numpy as np
 from pprint import pprint
 from math import floor, sqrt
-from shuffling_algorithms import knuth_shuffle
+from other_algorithms import knuth_shuffle
 import random
 
 def selection_sort(l: list) -> list:
@@ -101,7 +101,6 @@ def merge_sort(l: list) -> list:
 
         return l
 
-# chyba źle zaimplementowane - to wciaz zwykly insertion sort - dodaje wiecej elementow i nie jest zaimplementowany na zasadzie przesówania 
 def library_sort(l: list) -> list:
     ans = ['', l[0]]
     j = 1

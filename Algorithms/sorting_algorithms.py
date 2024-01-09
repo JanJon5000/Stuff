@@ -299,6 +299,14 @@ def spread_sort(l: list) -> list:
         del ans[1]
     return ans[0]
 
+def proxmap_sort(l: list) -> list:
+    maxLen = len(str(max(l)))
+    ans = ['0'*(maxLen - len(str(x))) + str(x) for x in l]
+    ans = [insertion_sort([int(x) for x in ans if x[0] == i]) for i in '0123456789']
+    while len(ans) > 1:
+        ans[0] += ans[1]
+        del ans[1]
+    return ans[0]
 
 def main():
     p = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 
@@ -311,10 +319,9 @@ def main():
          7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 
          965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    p = spread_sort(p)
+    p = proxmap_sort(p)
     print(p)
-    # print(p, len(format_msd_radix(p)))
-    plt.plot(np.array(format_msd_radix(p)), '.')
+    plt.plot(np.array(p), '.')
     plt.show()
 
 

@@ -3,6 +3,8 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 import numpy as np
 from pprint import pprint
 from math import floor, sqrt
+from shuffling_algorithms import knuth_shuffle
+import random
 
 def selection_sort(l: list) -> list:
     ans = l[:]
@@ -308,6 +310,40 @@ def proxmap_sort(l: list) -> list:
         del ans[1]
     return ans[0]
 
+def stalin_sort(l: list) -> list:
+    i = 0
+    stop = len(l)-1
+    while i < stop:
+        if l[i] > l[i+1]:
+            del l[i+1]
+            stop = len(l)-1
+        else:
+            i+=1
+    return l
+
+def is_sorted(l: list) -> bool:
+    for i in range(len(l)-1):
+        if l[i] > l[i+1]:
+            return False
+    return True
+def bogo_sort(l: list) -> list:
+    while is_sorted(l) == False:
+        l = knuth_shuffle(l)
+    return l
+
+def bogo_bogo_sort(l: list) -> list:
+    while True:
+        pass
+    return l
+
+def bozo_sort(l: list):
+    while is_sorted(l) == False:
+        indexes = [random.randint(0, len(l)-1), random.randint(0, len(l)-1)]
+        helper = l[indexes[0]]
+        l[indexes[0]] = l[indexes[1]]
+        l[indexes[1]] = helper
+    return l
+
 def main():
     p = [5132, 5645, 5144, 6682, 7708, 7710, 6689, 5160, 552, 1065, 44, 
          4142, 8751, 5168, 6711, 1592, 2622, 6735, 4691, 6743, 1121, 3170, 
@@ -319,7 +355,7 @@ def main():
          7027, 4988, 6533, 1927, 392, 6025, 904, 8600, 5017, 4018, 4546, 
          965, 8652, 5071, 9167, 3539, 8153, 3035, 2025, 7663, 4600, 8188]
     
-    p = proxmap_sort(p)
+    p = stalin_sort(p)
     print(p)
     plt.plot(np.array(p), '.')
     plt.show()

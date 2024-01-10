@@ -47,12 +47,15 @@ def affine_cipher(K: tuple, message: str, alph: str) -> str:
 def caesar_cipher(n: int, message: str, alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') -> str:
     return affine_cipher((1, n), message, alph)
 
+def altbash_cipher(message: str, alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') -> str:
+    return affine_cipher((-1, -1), message, alph)
+
 
 
 def main():
     standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    m = 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG'
-    print(caesar_cipher(23, m))
+    m = 'ASGHJDFASGFDGASD'
+    print(altbash_cipher(m))
     pass
 
 if __name__=='__main__':

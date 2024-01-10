@@ -44,9 +44,15 @@ def affine_cipher(K: tuple, message: str, alph: str) -> str:
             ans += char
     return ans
 
+def caesar_cipher(n: int, message: str, alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') -> str:
+    return affine_cipher((1, n), message, alph)
+
+
+
 def main():
-    alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    print(affine_cipher((5, 8), 'A	F	F	I	N	E	C	I	P	H	E	R', alph))
+    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    m = 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG'
+    print(caesar_cipher(23, m))
     pass
 
 if __name__=='__main__':

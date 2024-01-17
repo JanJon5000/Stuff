@@ -50,12 +50,17 @@ def caesar_cipher(n: int, message: str, alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') -> 
 def altbash_cipher(message: str, alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') -> str:
     return affine_cipher((-1, -1), message, alph)
 
-
+def autokey_cipher(message: str, primer: str, alph: str) -> str:
+    key = primer + message
+    ans = ''
+    for i in range(len(message)):
+        ans += alph[(alph.index(message[i])+alph.index(key[i]))%len(alph)]
+    return ans
 
 def main():
-    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    m = 'ASGHJDFASGFDGASD'
-    print(altbash_cipher(m))
+    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    m = 'HELLO'
+    print(autokey_cipher(m, 'N', standardAlph))
     pass
 
 if __name__=='__main__':

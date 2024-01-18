@@ -57,11 +57,22 @@ def autokey_cipher(message: str, primer: str, alph: str) -> str:
         ans += alph[(alph.index(message[i])+alph.index(key[i]))%len(alph)]
     return ans
 
+def beaufort_cipher(key: str, message: str, alph: str) -> str:
+    reversedAlph = (affine_cipher((-1, -1), alph, alph))
+    ans = ''
+    key = key.upper()
+    keyIndex = 0
+    for letter in message:
+        if keyIndex >= len(alph):
+            keyIndex = 0
+        ans += (reversedAlph[alph.index(key[keyIndex]):] + reversedAlph[:alph.index(key[keyIndex])])[ alph.index(letter)%len(alph) ]
+        keyIndex += 1
+    return ans
+
 def main():
-    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-    m = 'HELLO'
-    print(autokey_cipher(m, 'N', standardAlph))
-    pass
+    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.upper()
+    m = 'd'.upper()
+    print(beaufort_cipher('m', m, standardAlph))
 
 if __name__=='__main__':
     main()

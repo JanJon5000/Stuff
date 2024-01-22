@@ -1,4 +1,5 @@
 from pprint import pprint
+from random import randint
 
 def polibius_chessboard(string: str, dim: int) -> list:
     ans = []
@@ -95,11 +96,20 @@ def alberti_cipher(key: str, message: str, specificAlph: str, alph: str) -> str:
             codedMessage += ' '
     return codedMessage
 
+def r_matrix_key_generator(n: int, alphLen: int) -> list:
+    matrix = [[randint(0, alphLen-1) for _ in range(n)] for _ in range(n)]
+    return matrix
+def hill_cipher(message: str, matrixKey: list, alph: str) -> str:
+    wordVector = [alph.index(char) for char in message]
+    codedMessage = [sum([matrixKey[y][x]*wordVector[x] for x in range(len(wordVector))])%len(alph) for y in range(len(matrixKey))]
+    codedMessage = ''.join([alph[x] for x in codedMessage])
+    return codedMessage
+
 def main():
     standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    specificAlph = 'ALBERTICPHDFGHJKMNOSUVWXYZ'.upper()
-    m = 'this is a test of alberti'.upper()
-    print(alberti_cipher('catwalk', m, specificAlph, standardAlph))
+    m = 'act'.upper()
+    matrix = r_matrix_key_generator(len(m), len(standardAlph))
+    print(hill_cipher(m, matrix, standardAlph), matrix)
     
 if __name__=='__main__':
     main()

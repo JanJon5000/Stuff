@@ -69,10 +69,37 @@ def beaufort_cipher(key: str, message: str, alph: str) -> str:
         keyIndex += 1
     return ans
 
-def main():
-    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.upper()
-    m = 'd'.upper()
-    print(beaufort_cipher('m', m, standardAlph))
+def k_word_alph(key: str) -> str:
+    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    wantedCipher = ''
+    for char in key:
+        if char not in wantedCipher:
+            wantedCipher += char
+    for char in standardAlph:
+        if char not in wantedCipher:
+            wantedCipher += char
+    return wantedCipher
+def alberti_cipher(key: str, message: str, specificAlph: str, alph: str) -> str:
+    message = message.upper()
+    key = key.upper()
+    i = 0
+    codedMessage = ''
+    for element in message:
+        if element != ' ':
+            if i >= len(key):
+                i = 0
+            currentAlph = specificAlph[-alph.index(key[i]):] + specificAlph[0:-alph.index(key[i])]
+            codedMessage += currentAlph[alph.index(element)]
+            i += 1
+        else:
+            codedMessage += ' '
+    return codedMessage
 
+def main():
+    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    specificAlph = 'ALBERTICPHDFGHJKMNOSUVWXYZ'.upper()
+    m = 'this is a test of alberti'.upper()
+    print(alberti_cipher('catwalk', m, specificAlph, standardAlph))
+    
 if __name__=='__main__':
     main()

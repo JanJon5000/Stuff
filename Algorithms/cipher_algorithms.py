@@ -71,7 +71,7 @@ def beaufort_cipher(key: str, message: str, alph: str) -> str:
     return ans
 
 def k_word_alph(key: str) -> str:
-    standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    standardAlph = 'ABCDEFGHIJKLMNOPRSTUVWXYZ'
     wantedCipher = ''
     for char in key:
         if char not in wantedCipher:
@@ -105,11 +105,36 @@ def hill_cipher(message: str, matrixKey: list, alph: str) -> str:
     codedMessage = ''.join([alph[x] for x in codedMessage])
     return codedMessage
 
+def alph_f(alph: str):
+    newAlph = []
+    for i in range(int(len(alph)/5)):
+        newAlph.append(alph[0+i*5:5+i*5])
+    return newAlph
+def four_square_cipher(message: str, keywords: tuple) -> str:
+    standardAlph = 'ABCDEFGHIJKLMNOPRSTUVWXYZ'
+    message = message.upper()
+    partitionedMessage = [message[0+i*2:2+i*2] for i in range(int(len(message)/2+1))]
+    squares = [alph_f(k_word_alph(keywords[0].upper())), alph_f(k_word_alph(keywords[1].upper()))]
+    ansMessage = ''
+    for pair in partitionedMessage:
+        if len(pair) != 2:
+            ansMessage += pair
+            continue
+        else:
+            c1 = standardAlph.index(pair[0])
+            c2 = standardAlph.index(pair[1])
+            print(pair, c1//5, c2%5, squares)
+            ansMessage += squares[0][c1//5][c2%5]
+            print()
+            ansMessage += squares[1][c2//5][c1%5]
+
+    return ansMessage
+
 def main():
     standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    m = 'act'.upper()
-    matrix = r_matrix_key_generator(len(m), len(standardAlph))
-    print(hill_cipher(m, matrix, standardAlph), matrix)
+    noQ = 'ABCDEFGHIJKLMNOPRSTUVWXYZ'
+    m = 'helpmeobiwankenobi'.upper()
+    print(four_square_cipher(m, ('example', 'keyword')))
     
 if __name__=='__main__':
     main()

@@ -130,6 +130,7 @@ def four_square_cipher(message: str, keywords: tuple) -> str:
 
     return ansMessage
 
+
 def main():
     standardAlph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
     noQ = 'ABCDEFGHIJKLMNOPRSTUVWXYZ'

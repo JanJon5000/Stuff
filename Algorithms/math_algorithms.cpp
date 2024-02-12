@@ -19,6 +19,8 @@ int sub_factorial(int n, int multi = 1){
     return ans*s;
 }
 
+// it cant work
+
 int prime_num(int n){
     int ans = 1;
     for(int i = 1; i <= pow(2, n); i++){

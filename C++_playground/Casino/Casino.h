@@ -46,7 +46,7 @@ class Player{
                     break;
                 }
             }
-            GotoLine(saveFile, greaterScoreRow);
+            GotoLine(saveFile, i);
             saveFile << '\n' << namePseudonim << ' ' << to_string(score) << ' ' << to_string(endTime);
             saveFile.close()
         }

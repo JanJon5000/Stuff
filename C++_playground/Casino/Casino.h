@@ -35,20 +35,20 @@ class Player{
             while(std::getline(saveFile, text)){
                 i++; // first line - one
                 vector<string> transformedText; // plain tex transformed into a vector with everything partitioned (score, name etc)
-                for(c = 0;c<text.size();c++){
-                    if c == ' '{
+                for(int c = 0;c<text.size();c++){ // c (char)
+                    if(c == ' '){ // this for basicly creates a list of all the word in the player-line
                         transformedText.push_back(' ');
                     }else{
                         transformedText[transformedText.size()-1] += text[c];
                     }
                 }
-                if stoi(transformedText[1]) <= score{
+                if(stoi(transformedText[1]) <= score){
                     break;
                 }
             }
             GotoLine(saveFile, i);
             saveFile << '\n' << namePseudonim << ' ' << to_string(score) << ' ' << to_string(endTime);
-            saveFile.close()
+            saveFile.close();
         }
         void addScore(int a){
             score += a;

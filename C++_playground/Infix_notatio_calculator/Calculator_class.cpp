@@ -2,10 +2,10 @@
 Calculator::Calculator(){}
 
 std::string Calculator::clear_addition(std::string input){
-    std::string output = "";
-    std::string current = "";
-    int i = 0;
-
+    int counter = 0;
+    for(int i=0;i<input.size();i++){
+        
+    }
 }
 
 std::string Calculator::solve_equation(std::string input){
@@ -15,7 +15,7 @@ std::string Calculator::solve_equation(std::string input){
             counter++;
         }
     }
-    int brackets[counter][2];
+    int brackets[counter][3];
 
     int begBrack, endBrack = 0;
     for(int i=0;i<input.size();i++){
@@ -23,7 +23,7 @@ std::string Calculator::solve_equation(std::string input){
             brackets[begBrack][0] = i;
             begBrack++;
         }else if(input[i] == ')'){
-            brackets[endBrack][0] = i;
+            brackets[endBrack][1] = i;
             endBrack++;
         }
     }

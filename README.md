@@ -9,11 +9,11 @@ That was it for the intro, now lets explore the files:
 
 - [Podstawy_programowania](#podstawy_programowania)
     Minor console project for a grade.
-- [Algoritms][#Algorithms] 
+- [Algoritms][#algorithms] 
     I try to recreate and understand algorithms here
 - [C++Playgound](#c-playground)
     Bruh - its a c++ playground B).
-- [Anthena]
+- [Anthena][#anthena]
     Matlab script that lets me create graps related to anthenas fast.
 
 ---

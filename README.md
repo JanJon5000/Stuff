@@ -13,7 +13,7 @@ That was it for the intro, now lets explore the files:
     I try to recreate and understand algorithms here
 - [C++Playgound](#c-playground)
     Bruh - its a c++ playground B).
-- [Anthena](#anthena)
+- [Antenna](#antenna)
     Matlab script that lets me create graps related to anthenas fast.
 
 ---
@@ -32,7 +32,7 @@ That was it for the intro, now lets explore the files:
     - Language Manipulator in which you can make strings such as RERERERERERERE with commands and when lazy
     - Math - which was an attempt to make non-decimal fractions and mathematical vectors</p>
 
-## Anthena
+## Antenna
 <strong>COMPLETED - MIGHT MAKE MORE OF IT IN THE FUTURE</strong>
     <p>Matlab script I created to draw standarized antenna radiation graphs - for purpose of my education, passing the class and as an excuse to learn some Matlab (Excel cant do these)</p>
     ![polar coordinantes characteristics](foto/a1.png)

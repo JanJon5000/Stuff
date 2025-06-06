@@ -1,7 +1,7 @@
 # Stuff
 This repo was originally my idea to store small and insignificant to my future career and education files which I wanted to show of on github.
 
-When I am writing this (20.04.2025) I came back to bring fresh air to it and kind of give it a new purpose. New-old purpose to be exact - it will act as a big basket with console/window aplications I made for <strong>some actual purpose</strong> and not only to "understand if statement in dart".
+When I am writing this (20.04.2025) I came back to bring fresh air to it and kind of give it a new purpose. New-old purpose to be exact - it will act as a big basket with console/window applications I made for <strong>some actual purpose</strong> and not only to "understand if statement in dart".
 
 That was it for the intro, now lets explore the files:
 
@@ -14,7 +14,7 @@ That was it for the intro, now lets explore the files:
 - [C++Playgound](#c-playground)
     Bruh - its a c++ playground B).
 - [Antenna](#antenna)
-    Matlab script that lets me create graps related to anthenas fast.
+    Matlab script that lets me create graps related to antenas fast.
 
 ---
 ## Podstawy_programowania

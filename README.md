@@ -15,6 +15,8 @@ That was it for the intro, now lets explore the files:
     Bruh - its a c++ playground B).
 - [Anthena](#anthena)
     Matlab script that lets me create graps related to anthenas fast.
+- [LeetCode] ()
+    LeetCode scripts I've written
 
 ---
 ## Podstawy_programowania
@@ -38,3 +40,6 @@ That was it for the intro, now lets explore the files:
     ![polar coordinantes characteristics](foto/a1.png)
     ![rectangular coordinantes characteristics](foto/a2.png)
     <p>File doesnt generate ALL OF IT as on the photos, but besides alpha0 which I needeed to add manualy, everything can be done with minor edditing for 2 minutes</p>
+
+## LeetCode
+    <p>Scripts I have written in C to andwer leetcode problems.</p>

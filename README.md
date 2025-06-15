@@ -1,7 +1,7 @@
 # Stuff
 This repo was originally my idea to store small and insignificant to my future career and education files which I wanted to show of on github.
 
-When I am writing this (20.04.2025) I came back to bring fresh air to it and kind of give it a new purpose. New-old purpose to be exact - it will act as a big basket with console/window aplications I made for <strong>some actual purpose</strong> and not only to "understand if statement in dart".
+When I am writing this (20.04.2025) I came back to bring fresh air to it and kind of give it a new purpose. New-old purpose to be exact - it will act as a big basket with console/window applications I made for <strong>some actual purpose</strong> and not only to "understand if statement in dart".
 
 That was it for the intro, now lets explore the files:
 
@@ -34,7 +34,7 @@ That was it for the intro, now lets explore the files:
     - Language Manipulator in which you can make strings such as RERERERERERERE with commands and when lazy
     - Math - which was an attempt to make non-decimal fractions and mathematical vectors</p>
 
-## Anthena
+## Antenna
 <strong>COMPLETED - MIGHT MAKE MORE OF IT IN THE FUTURE</strong>
     <p>Matlab script I created to draw standarized antenna radiation graphs - for purpose of my education, passing the class and as an excuse to learn some Matlab (Excel cant do these)</p>
     ![polar coordinantes characteristics](foto/a1.png)

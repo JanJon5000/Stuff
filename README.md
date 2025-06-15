@@ -13,9 +13,9 @@ That was it for the intro, now lets explore the files:
     I try to recreate and understand algorithms here
 - [C++Playgound](#c-playground)
     Bruh - its a c++ playground B).
-- [Anthena](#anthena)
+- [Anthena](#antenna)
     Matlab script that lets me create graps related to anthenas fast.
-- [LeetCode] ()
+- [LeetCode](#leetcode)
     LeetCode scripts I've written
 
 ---
